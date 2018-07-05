@@ -20,7 +20,7 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
     var itemToEdit: Messages?
     var newMessages: Results<Messages>?
     var itemToDelete = Messages()
-    
+    var digra = ""
 
     
     override func viewDidLoad() {
@@ -77,6 +77,7 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
         }
         
     }
+    
     func save(category: Messages) {
         do {
             try realm.write {
