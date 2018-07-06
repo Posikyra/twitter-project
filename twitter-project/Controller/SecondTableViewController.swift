@@ -13,40 +13,24 @@ protocol SecondTableViewControllerDelegate: class {
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishAdding item: Messages)
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishEditing item: Messages)
 }
-
 class SecondTableViewController: UITableViewController, UITextFieldDelegate {
     let realm = try! Realm()
     let message = Messages()
     var itemToEdit: Messages?
     var newMessages: Results<Messages>?
     var itemToDelete = Messages()
-    var digra = ""
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.cellTextField.delegate = self
-        if let item = itemToEdit {
-            title = "Edit Item"
-            cellTextField.text = item.text
-        }
     }
     weak var delegate: SecondTableViewControllerDelegate?
-    
     @IBOutlet weak var cellTextField: UITextField!
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         saveOrEdit()
     }
-    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-        delegate?.SecondTableViewControllerDidCancel(_controller: self)
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         saveOrEdit()
         return true
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         cellTextField.becomeFirstResponder()
         cellTextField.placeholder = "Create new item"
@@ -75,9 +59,7 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
             tableView.reloadData()
             delegate?.SecondTableViewController(self, didFinishAdding: item)
         }
-        
     }
-    
     func save(category: Messages) {
         do {
             try realm.write {
@@ -91,7 +73,6 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
     func load() {
         newMessages = realm.objects(Messages.self)
         newMessages = newMessages?.sorted(byKeyPath: "date", ascending: false)
-        
         tableView.reloadData()
     }
     

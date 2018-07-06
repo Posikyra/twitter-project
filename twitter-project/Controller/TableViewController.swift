@@ -10,35 +10,31 @@ import UIKit
 import RealmSwift
 
 class TableViewController: UITableViewController, SecondTableViewControllerDelegate {
-    
+    //MARK: - SecondTableViewController protocol methods
     func SecondTableViewControllerDidCancel(_controller: SecondTableViewController) {
         navigationController?.popViewController(animated: true)
     }
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishEditing item: Messages) {
         tableView.reloadData()
         navigationController?.popViewController(animated: true)
-        
     }
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishAdding item: Messages) {
         tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
+    //MARK: - TableView methods and datasource
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMessages()
     }
-    
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "addItem", sender: Any?.self)
     }
     let realm = try! Realm()
     var allMessages: Results<Messages>?
-
-    //MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allMessages?.count ?? 1
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath)
         if let item = allMessages?[indexPath.row] {
@@ -62,7 +58,6 @@ class TableViewController: UITableViewController, SecondTableViewControllerDeleg
         delete.backgroundColor = .red
         return [delete, edit]
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addItem" {
             let controller = segue.destination as! SecondTableViewController
@@ -78,17 +73,11 @@ class TableViewController: UITableViewController, SecondTableViewControllerDeleg
             controller.itemToDelete = object
         }
     }
-    
-    
-    
     func loadMessages() {
         allMessages = realm.objects(Messages.self)
         allMessages = allMessages?.sorted(byKeyPath: "date", ascending: false)
         self.tableView.setEditing(false, animated: true)
         tableView.reloadData()
     }
-    
-
-    
 }
 
