@@ -8,12 +8,17 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 protocol SecondTableViewControllerDelegate: class {
     func SecondTableViewControllerDidCancel(_controller: SecondTableViewController)
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishAdding item: Messages)
     func SecondTableViewController(_ controller: SecondTableViewController, didFinishEditing item: Messages)
 }
 class SecondTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    var ref: DatabaseReference!
+
+    
     let realm = try! Realm()
     let message = Messages()
     var itemToEdit: Messages?
@@ -54,7 +59,8 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
             let item = Messages()
             item.text = cellTextField.text!
             item.date = Date()
-            item.id = item.date!.description
+           // item.id = item.date!.description
+            item.id = item.IncrementaID()
             self.save(category: item)
             tableView.reloadData()
             delegate?.SecondTableViewController(self, didFinishAdding: item)
@@ -75,5 +81,4 @@ class SecondTableViewController: UITableViewController, UITextFieldDelegate {
         newMessages = newMessages?.sorted(byKeyPath: "date", ascending: false)
         tableView.reloadData()
     }
-    
 }

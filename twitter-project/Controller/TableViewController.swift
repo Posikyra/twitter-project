@@ -8,6 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ForecastIOClient
+import Firebase
+import FirebaseDatabase
 
 class TableViewController: UITableViewController, SecondTableViewControllerDelegate {
     //MARK: - SecondTableViewController protocol methods
@@ -22,11 +25,85 @@ class TableViewController: UITableViewController, SecondTableViewControllerDeleg
         tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
+    
+    func grabFirebaseData(data: String) {
+        let databaseRef = Database.database().reference()
+        databaseRef.child("Messages").observe(.value, with: {
+            snapshot in
+            print(snapshot)
+            for snap in snapshot.children.allObjects as! [DataSnapshot] {
+                guard let dictionary = snap.value as? [String: AnyObject] else {
+                    return
+                }
+                let text = dictionary[data] as? String
+                let item = Messages()
+                item.text = text!
+                item.date = Date()
+                item.id = item.IncrementaID()
+                self.save(category: item)
+                self.loadMessages()
+            }
+        })
+    }
+    
     //MARK: - TableView methods and datasource
     override func viewDidLoad() {
         super.viewDidLoad()
+        grabFirebaseData(data: "message1")
+        grabFirebaseData(data: "message2")
+        grabFirebaseData(data: "message3")
+        loadMessages()
+        //////////////////////////////////////////
+//        ForecastIOClient.apiKey = "dc43852eb8671f793e9ba0502535d754"  //////////API
+//        ForecastIOClient.units = Units.Uk
+//        ForecastIOClient.sharedInstance.forecast(55.751244, longitude: 37.618423) { (forecast, forecastAPICalls) -> Void in
+//            var temperature = String?((forecast.currently?.summary)!)
+//            let item = Messages()
+//            item.text = "moscow " + temperature!
+//            item.date = Date()
+//            item.id = item.IncrementaID()
+//            self.save(category: item)
+//            super.viewDidLoad()
+//            self.loadMessages()
+//        }
+//        ForecastIOClient.sharedInstance.forecast(51.509865, longitude: -0.118092) { (forecast, forecastAPICalls) -> Void in
+//            var temperature = String?((forecast.currently?.summary)!)
+//            let item = Messages()
+//            item.text = "london " + temperature!
+//            item.date = Date()
+//            item.id = item.IncrementaID()
+//            self.save(category: item)
+//            super.viewDidLoad()
+//            self.loadMessages()
+//        }
+//        ForecastIOClient.sharedInstance.forecast(50.431782, longitude: 30.516382) { (forecast, forecastAPICalls) -> Void in
+//            var temperature = String?((forecast.currently?.summary)!)
+//            let item = Messages()
+//            item.text = "kyiv " + temperature!
+//            item.date = Date()
+//            item.id = item.IncrementaID()
+//            self.save(category: item)
+//            super.viewDidLoad()
+//            self.loadMessages()
+//        }
+        /////////////////////////////////////////
+        tableView.reloadData()
+    }
+    
+    func save(category: Messages) {
+        do {
+            try realm.write {
+                realm.add(category)
+            }
+        } catch {
+            print("Error saving category \(error)")
+        }
         loadMessages()
     }
+    
+    
+    
+
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "addItem", sender: Any?.self)
     }
