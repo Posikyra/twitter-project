@@ -14,8 +14,7 @@
 		8D13001720ED1D830095CED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001620ED1D830095CED0 /* Assets.xcassets */; };
 		8D13001A20ED1D830095CED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001820ED1D830095CED0 /* LaunchScreen.storyboard */; };
 		8D13002720ED3B730095CED0 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13002620ED3B730095CED0 /* Messages.swift */; };
-		8D13004B20EE592C0095CED0 /* SecondTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13004A20EE592C0095CED0 /* SecondTableViewController.swift */; };
-		8D8964DB20F2718F00A49605 /* FirebaseMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8964DA20F2718F00A49605 /* FirebaseMessages.swift */; };
+		8D8964DB20F2718F00A49605 /* MessagesFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */; };
 		8D8964DD20F286B000A49605 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8964DC20F286B000A49605 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +29,7 @@
 		8D13001920ED1D830095CED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D13001B20ED1D830095CED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D13002620ED3B730095CED0 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		8D13004A20EE592C0095CED0 /* SecondTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTableViewController.swift; sourceTree = "<group>"; };
-		8D8964DA20F2718F00A49605 /* FirebaseMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMessages.swift; sourceTree = "<group>"; };
+		8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesFirebase.swift; sourceTree = "<group>"; };
 		8D8964DC20F286B000A49605 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FDDDDAFE1E0A97FC9419A242 /* Pods_twitter_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				8D13002620ED3B730095CED0 /* Messages.swift */,
-				8D8964DA20F2718F00A49605 /* FirebaseMessages.swift */,
+				8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				8D13001120ED1D810095CED0 /* TableViewController.swift */,
-				8D13004A20EE592C0095CED0 /* SecondTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,8 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D13001220ED1D810095CED0 /* TableViewController.swift in Sources */,
-				8D8964DB20F2718F00A49605 /* FirebaseMessages.swift in Sources */,
-				8D13004B20EE592C0095CED0 /* SecondTableViewController.swift in Sources */,
+				8D8964DB20F2718F00A49605 /* MessagesFirebase.swift in Sources */,
 				8D13002720ED3B730095CED0 /* Messages.swift in Sources */,
 				8D13001020ED1D810095CED0 /* AppDelegate.swift in Sources */,
 			);
