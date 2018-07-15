@@ -11,7 +11,7 @@ import RealmSwift
 import Firebase
 class Messages: Object {
     
-    @objc dynamic var id = 0 ///сделай снова текст
+    @objc dynamic var id = 0 
     @objc dynamic var text = ""
     @objc dynamic var date: Date?
     

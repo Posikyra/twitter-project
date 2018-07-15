@@ -14,8 +14,13 @@
 		8D13001720ED1D830095CED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001620ED1D830095CED0 /* Assets.xcassets */; };
 		8D13001A20ED1D830095CED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001820ED1D830095CED0 /* LaunchScreen.storyboard */; };
 		8D13002720ED3B730095CED0 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13002620ED3B730095CED0 /* Messages.swift */; };
-		8D8964DB20F2718F00A49605 /* MessagesFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */; };
+		8D8964DB20F2718F00A49605 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8964DA20F2718F00A49605 /* FirebaseData.swift */; };
 		8D8964DD20F286B000A49605 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8964DC20F286B000A49605 /* GoogleService-Info.plist */; };
+		8DC7EF5920FB1ECE00640D85 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */; };
+		8DC7EF5B20FB1EE600640D85 /* RegisterViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */; };
+		8DC7EF5D20FB1EF800640D85 /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */; };
+		8DC7EF6020FB210700640D85 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5F20FB210700640D85 /* CustomCell.swift */; };
+		8DC7EF6220FB211A00640D85 /* CustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7EF6120FB211A00640D85 /* CustomCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +34,13 @@
 		8D13001920ED1D830095CED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D13001B20ED1D830095CED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D13002620ED3B730095CED0 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesFirebase.swift; sourceTree = "<group>"; };
+		8D8964DA20F2718F00A49605 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		8D8964DC20F286B000A49605 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController2.swift; sourceTree = "<group>"; };
+		8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
+		8DC7EF5F20FB210700640D85 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		8DC7EF6120FB211A00640D85 /* CustomCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellView.xib; sourceTree = "<group>"; };
 		FDDDDAFE1E0A97FC9419A242 /* Pods_twitter_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				8D13002620ED3B730095CED0 /* Messages.swift */,
-				8D8964DA20F2718F00A49605 /* MessagesFirebase.swift */,
+				8D8964DA20F2718F00A49605 /* FirebaseData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -106,6 +116,7 @@
 		8D13002320ED38AD0095CED0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DC7EF5E20FB20E100640D85 /* Custom Cell */,
 				8D13001320ED1D810095CED0 /* Main.storyboard */,
 				8D13001820ED1D830095CED0 /* LaunchScreen.storyboard */,
 			);
@@ -116,8 +127,20 @@
 			isa = PBXGroup;
 			children = (
 				8D13001120ED1D810095CED0 /* TableViewController.swift */,
+				8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */,
+				8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */,
+				8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		8DC7EF5E20FB20E100640D85 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8DC7EF5F20FB210700640D85 /* CustomCell.swift */,
+				8DC7EF6120FB211A00640D85 /* CustomCellView.xib */,
+			);
+			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
 		AE6EEB74568820C83D68FCCB /* Pods */ = {
@@ -191,6 +214,7 @@
 			files = (
 				8D13001A20ED1D830095CED0 /* LaunchScreen.storyboard in Resources */,
 				8D8964DD20F286B000A49605 /* GoogleService-Info.plist in Resources */,
+				8DC7EF6220FB211A00640D85 /* CustomCellView.xib in Resources */,
 				8D13001720ED1D830095CED0 /* Assets.xcassets in Resources */,
 				8D13001520ED1D810095CED0 /* Main.storyboard in Resources */,
 			);
@@ -226,6 +250,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-twitter-project/Pods-twitter-project-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ForecastIOClient/ForecastIOClient.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -237,6 +262,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ForecastIOClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -256,10 +282,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC7EF5920FB1ECE00640D85 /* ProfileViewController.swift in Sources */,
 				8D13001220ED1D810095CED0 /* TableViewController.swift in Sources */,
-				8D8964DB20F2718F00A49605 /* MessagesFirebase.swift in Sources */,
+				8D8964DB20F2718F00A49605 /* FirebaseData.swift in Sources */,
 				8D13002720ED3B730095CED0 /* Messages.swift in Sources */,
 				8D13001020ED1D810095CED0 /* AppDelegate.swift in Sources */,
+				8DC7EF5D20FB1EF800640D85 /* LogOutViewController.swift in Sources */,
+				8DC7EF6020FB210700640D85 /* CustomCell.swift in Sources */,
+				8DC7EF5B20FB1EE600640D85 /* RegisterViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

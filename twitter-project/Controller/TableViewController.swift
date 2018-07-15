@@ -28,12 +28,12 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        uploadRemoteData()
+        
         realm = try! Realm()
         if !UserDefaults.standard.bool(forKey: "db_install") {
-        
-        loadMessages()
-        tableView.reloadData()
+        uploadRemoteData()
+        //loadMessages()
+        //tableView.reloadData()
     }
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         ref = Database.database().reference(withPath: "New messages")
@@ -79,9 +79,15 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             let item = self.allMessages?[indexPath.row]
+            
             try! self.realm.write({
                 self.realm.delete(item!)
+                
             })
+            self.ref = Database.database().reference()
+            self.ref?.removeValue()
+            
+            
             tableView.deleteRows(at:[indexPath], with: .automatic)
         }
         let edit = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
@@ -97,7 +103,7 @@ class TableViewController: UITableViewController {
                     messageObj?.text = alertTextField.text!
                     messageObj?.date = Date()
                     self.realm.add(messageObj!, update: true)})
-                self.ref.child("Message \(messageObj?.id)").updateChildValues(["messageText" : alertTextField.text!])
+                self.ref.child("Message \(String(describing: messageObj?.id))").updateChildValues(["messageText" : alertTextField.text!])
                 self.allMessages = self.allMessages?.sorted(byKeyPath: "date", ascending: false)
                 self.tableView.reloadData()
             })
@@ -119,7 +125,7 @@ class TableViewController: UITableViewController {
 
 func uploadRemoteData() {
     
-    ref = Database.database().reference(withPath: "Messages")
+    ref = Database.database().reference(withPath: "New messages")
     
     ref.observe(.value, with: {[weak self] (snapshot) in
         self?.realm = try! Realm()
@@ -134,8 +140,10 @@ func uploadRemoteData() {
             })
             
         }
-        self?.tableView.reloadData()
         self?.realm.refresh()
+        
+        self?.tableView.reloadData()
+        
     })
     
     UserDefaults.standard.set(true, forKey: "db_install")
@@ -160,53 +168,14 @@ func uploadRemoteData() {
 //        }
 //    })
 //}
-//    let realm = try! Realm()
-//    let message = Messages()
-//    var itemToEdit: Messages?
-//    var newMessages: Results<Messages>?
-//    var itemToDelete = Messages()
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//    weak var delegate: SecondTableViewControllerDelegate?
-//    @IBOutlet weak var cellTextField: UITextField!
-//    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-//        saveOrEdit()
-//    }
+
+
 //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        saveOrEdit()
 //        return true
 //    }
-//    override func viewWillAppear(_ animated: Bool) {
-//        cellTextField.becomeFirstResponder()
-//        cellTextField.placeholder = "Create new item"
-//        if let item = itemToEdit {
-//            title = "Edit Item"
-//            cellTextField.text = item.text
-//        }
-//    }
-//    func saveOrEdit() {
-//        if let itemToEdit = itemToEdit {
-//            title = "Edit Item"
-//            do {
-//                try realm.write {
-//                    itemToEdit.text = cellTextField.text!
-//                }
-//            } catch {
-//                print(error)
-//            }
-//            delegate?.SecondTableViewController(self, didFinishEditing: itemToEdit)
-//        } else {
-//            let item = Messages()
-//            item.text = cellTextField.text!
-//            item.date = Date()
-//            // item.id = item.date!.description
-//            item.id = item.IncrementaID()
-//            self.save(category: item)
-//            tableView.reloadData()
-//            delegate?.SecondTableViewController(self, didFinishAdding: item)
-//        }
-//    }
+
+//
 //    func save(category: Messages) {
 //        do {
 //            try realm.write {
@@ -218,18 +187,3 @@ func uploadRemoteData() {
 //        load()
 //    }
 
-//    func save(category: Messages) {
-//        do {
-//            try realm.write {
-//                realm.add(category)
-//            }
-//        } catch {
-//            print("Error saving category \(error)")
-//        }
-//        loadMessages()
-//    }
-
-
-
-//
-//
