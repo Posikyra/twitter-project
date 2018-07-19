@@ -8,14 +8,14 @@
 
 import Foundation
 import FirebaseDatabase
+
 var messagesFirebase = Array<MessagesFireBase>()
 
-
 struct MessagesFireBase {
+    
     let messageText: String!
     let messageId: Int
     let ref: DatabaseReference!
-    
     
     init(messageText: String, messageId: Int) {
         self.messageText = messageText

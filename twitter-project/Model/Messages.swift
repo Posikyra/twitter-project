@@ -15,7 +15,6 @@ class Messages: Object {
     @objc dynamic var text = ""
     @objc dynamic var date: Date?
     
-    
     override static func primaryKey() -> String? {
         return "id"
     }

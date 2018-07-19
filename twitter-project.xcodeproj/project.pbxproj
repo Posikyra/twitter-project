@@ -14,10 +14,11 @@
 		8D13001720ED1D830095CED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001620ED1D830095CED0 /* Assets.xcassets */; };
 		8D13001A20ED1D830095CED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D13001820ED1D830095CED0 /* LaunchScreen.storyboard */; };
 		8D13002720ED3B730095CED0 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13002620ED3B730095CED0 /* Messages.swift */; };
+		8D647A7D2100A55A0044D2EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D647A7C2100A55A0044D2EA /* User.swift */; };
 		8D8964DB20F2718F00A49605 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8964DA20F2718F00A49605 /* FirebaseData.swift */; };
 		8D8964DD20F286B000A49605 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8964DC20F286B000A49605 /* GoogleService-Info.plist */; };
 		8DC7EF5920FB1ECE00640D85 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */; };
-		8DC7EF5B20FB1EE600640D85 /* RegisterViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */; };
+		8DC7EF5B20FB1EE600640D85 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5A20FB1EE600640D85 /* RegisterViewController.swift */; };
 		8DC7EF5D20FB1EF800640D85 /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */; };
 		8DC7EF6020FB210700640D85 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7EF5F20FB210700640D85 /* CustomCell.swift */; };
 		8DC7EF6220FB211A00640D85 /* CustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7EF6120FB211A00640D85 /* CustomCellView.xib */; };
@@ -34,10 +35,11 @@
 		8D13001920ED1D830095CED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D13001B20ED1D830095CED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D13002620ED3B730095CED0 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		8D647A7C2100A55A0044D2EA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8D8964DA20F2718F00A49605 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		8D8964DC20F286B000A49605 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController2.swift; sourceTree = "<group>"; };
+		8DC7EF5A20FB1EE600640D85 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
 		8DC7EF5F20FB210700640D85 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		8DC7EF6120FB211A00640D85 /* CustomCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellView.xib; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				8D13002620ED3B730095CED0 /* Messages.swift */,
 				8D8964DA20F2718F00A49605 /* FirebaseData.swift */,
+				8D647A7C2100A55A0044D2EA /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,7 +131,7 @@
 			children = (
 				8D13001120ED1D810095CED0 /* TableViewController.swift */,
 				8DC7EF5820FB1ECE00640D85 /* ProfileViewController.swift */,
-				8DC7EF5A20FB1EE600640D85 /* RegisterViewController2.swift */,
+				8DC7EF5A20FB1EE600640D85 /* RegisterViewController.swift */,
 				8DC7EF5C20FB1EF800640D85 /* LogOutViewController.swift */,
 			);
 			path = Controller;
@@ -254,6 +257,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -266,6 +270,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -287,9 +292,10 @@
 				8D8964DB20F2718F00A49605 /* FirebaseData.swift in Sources */,
 				8D13002720ED3B730095CED0 /* Messages.swift in Sources */,
 				8D13001020ED1D810095CED0 /* AppDelegate.swift in Sources */,
+				8D647A7D2100A55A0044D2EA /* User.swift in Sources */,
 				8DC7EF5D20FB1EF800640D85 /* LogOutViewController.swift in Sources */,
 				8DC7EF6020FB210700640D85 /* CustomCell.swift in Sources */,
-				8DC7EF5B20FB1EE600640D85 /* RegisterViewController2.swift in Sources */,
+				8DC7EF5B20FB1EE600640D85 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

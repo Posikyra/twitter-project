@@ -10,35 +10,61 @@ import UIKit
 import RealmSwift
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class TableViewController: UITableViewController {
     var realm = try! Realm()
-    var allMessages: Results<Messages>?
+    var allMessages: Results<Messages>!
     var ref: DatabaseReference!
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         allMessages = realm.objects(Messages.self)
         self.allMessages = self.allMessages?.sorted(byKeyPath: "id", ascending:false)
-        
         self.tableView.setEditing(false, animated: true)
         self.tableView.reloadData()
     }
+    
     override func viewDidLoad() {
+        
+       
+        
         super.viewDidLoad()
-        
-        
         realm = try! Realm()
         if !UserDefaults.standard.bool(forKey: "db_install") {
         uploadRemoteData()
-        //loadMessages()
-        //tableView.reloadData()
+        tableView.reloadData()
     }
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         ref = Database.database().reference(withPath: "New messages")
         
     }
+    
+    
+    @IBAction func profileButtonPressed(_ sender: Any) {
+        
+                let listener = Auth.auth().addStateDidChangeListener {
+                    auth, user in
+                    if user != nil {
+                        
+                        self.performSegue(withIdentifier: "logOutSegue", sender: nil)
+                    } else {
+                       self.performSegue(withIdentifier: "profileSegue", sender: nil)
+                    }
+                }
+                Auth.auth().removeStateDidChangeListener(listener)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func addButton(_ sender: Any?) {
         let alertController = UIAlertController(title: "New message", message: "Enter message", preferredStyle: .alert)
         var alertTextField: UITextField!
@@ -58,7 +84,7 @@ class TableViewController: UITableViewController {
                 self.realm.add(message)
                 self.allMessages = self.allMessages?.sorted(byKeyPath: "id", ascending:false)
             }
-            let message1 = MessagesFireBase(messageText: text, messageId: message.id)
+            let message1 = MessagesFireBase(messageText: message.text, messageId: message.id)
             let taskRef = self.ref.child("Message \(message.id)")
             taskRef.setValue(message1.convertToDictionary())
             self.tableView.reloadData()
@@ -66,6 +92,7 @@ class TableViewController: UITableViewController {
         })
         present(alertController, animated: true, completion: nil)
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allMessages?.count ?? 1
     }
@@ -78,32 +105,30 @@ class TableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
-            let item = self.allMessages?[indexPath.row]
-            
+            let item = self.allMessages[indexPath.row]
+            self.ref.child("Message \(item.id)").removeValue()
             try! self.realm.write({
-                self.realm.delete(item!)
+                self.realm.delete(item)
                 
             })
-            self.ref = Database.database().reference()
-            self.ref?.removeValue()
             
             
             tableView.deleteRows(at:[indexPath], with: .automatic)
         }
         let edit = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
             let alertController = UIAlertController(title: "Edit message", message: nil, preferredStyle: .alert)
-            let messageObj = self.allMessages?[indexPath.row]
+            let messageObj = self.allMessages[indexPath.row]
             var alertTextField: UITextField!
             alertController.addTextField { textField in
                 alertTextField = textField
-                textField.text = messageObj?.text
+                textField.text = messageObj.text
             }
             alertController.addAction(UIAlertAction(title: "Edit", style: .default) { _ in
                 try! self.realm.write({
-                    messageObj?.text = alertTextField.text!
-                    messageObj?.date = Date()
-                    self.realm.add(messageObj!, update: true)})
-                self.ref.child("Message \(String(describing: messageObj?.id))").updateChildValues(["messageText" : alertTextField.text!])
+                    messageObj.text = alertTextField.text!
+                    messageObj.date = Date()
+                    self.realm.add(messageObj, update: true)})
+                self.ref.child("Message \(String(describing: messageObj.id))").updateChildValues(["messageText" : alertTextField.text!])
                 self.allMessages = self.allMessages?.sorted(byKeyPath: "date", ascending: false)
                 self.tableView.reloadData()
             })
@@ -125,65 +150,30 @@ class TableViewController: UITableViewController {
 
 func uploadRemoteData() {
     
-    ref = Database.database().reference(withPath: "New messages")
+    self.ref = Database.database().reference(withPath: "New messages")
     
-    ref.observe(.value, with: {[weak self] (snapshot) in
-        self?.realm = try! Realm()
+    self.ref.observe(.value, with: {[weak self] (snapshot) in
+        let realm = try! Realm()
         for item in snapshot.children {
-            let messangeBase = MessagesFireBase(snapshot: item as! DataSnapshot)
-            messagesFirebase.append(messangeBase)
+            let messageBase = MessagesFireBase(snapshot: item as! DataSnapshot)
+            messagesFirebase.append(messageBase)
             let messageForRealm = Messages()
-            messageForRealm.text = messangeBase.messageText
-            messageForRealm.id = messangeBase.messageId
-            try! self?.realm.write({
-                self?.realm.add(messageForRealm)
+            messageForRealm.text = messageBase.messageText
+            messageForRealm.id = messageBase.messageId
+            try! realm.write({
+                realm.add(messageForRealm)
             })
             
         }
-        self?.realm.refresh()
-        
         self?.tableView.reloadData()
+        realm.refresh()
+        
+        
         
     })
     
     UserDefaults.standard.set(true, forKey: "db_install")
 }
 }
-//func grabFirebaseData(data: String) {
-//    let databaseRef = Database.database().reference()
-//    databaseRef.child("Messages").observe(.value, with: {
-//        snapshot in
-//        print(snapshot)
-//        for snap in snapshot.children.allObjects as! [DataSnapshot] {
-//            guard let dictionary = snap.value as? [String: AnyObject] else {
-//                return
-//            }
-//            let text = dictionary[data] as? String
-//            let item = Messages()
-//            item.text = text!
-//            item.date = Date()
-//            item.id = item.IncrementaID()
-//            self.save(category: item)
-//            self.loadMessages()
-//        }
-//    })
-//}
 
-
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        saveOrEdit()
-//        return true
-//    }
-
-//
-//    func save(category: Messages) {
-//        do {
-//            try realm.write {
-//                realm.add(category)
-//            }
-//        } catch {
-//            print("Error saving category \(error)")
-//        }
-//        load()
-//    }
 
